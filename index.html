@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title>Real-Time Updates</title>
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Real-Time Updates</h1>
+  <div id="chatBox"></div>
+  <input type="text" id="messageInput" placeholder="Type your message">
+  <button onclick="sendMessage()">Send</button>
+  <script>
+    const socket = io('http://localhost:3000');
+    const chatBox = document.getElementById('chatBox');
+    const messageInput = document.getElementById('messageInput');
+
+    function displayMessage(message) {
+      const newMessage = document.createElement('div');
+      newMessage.textContent = message;
+      chatBox.appendChild(newMessage);
+    }
+
+    function sendMessage() {
+      const message = messageInput.value;
+      socket.emit('newMessage', message);
+      displayMessage(`You: ${message}`);
+      messageInput.value = '';
+    }
+
+    socket.on('newMessage', (message) => {
+      displayMessage(`Friend: ${message}`);
+    });
+
+    socket.on('acknowledgement', (message) => {
+      displayMessage(message);
+    });
+
+	socket.on('periodicUpdate', (message)=>{
+		console.log('periodicUpdate',message)
+		displayMessage(message);
+	})
+
+	socket.on('getas', (message)=>{
+		console.log('periodicUpdate',message)
+		displayMessage(message);
+	})
+
+    socket.on('connect', () => {
+      displayMessage('Connected to the websockets!');
+    });
+
+    socket.on('connect_error', (err) => {
+      console.log('Connection Error: ', err);
+      displayMessage('Connection Error');
+    });
+  </script>
+</body>
+</html>
