@@ -5,7 +5,8 @@ import { io } from 'socket.io-client';
 import { onUnmounted, ref } from 'vue';
 import { Person } from './types/person';
 
-const socket = io('http://localhost:3000');
+
+const socket = io();
 
 const ranking = ref<Person[]>([]);
 

@@ -1,0 +1,13 @@
+[project]
+name = "web-sockets-demo"
+
+[build]
+commands = [
+  "cd client && npm ci && npm run build",
+  "cd . && npm ci && npm run build"
+]
+
+[start]
+commands = [
+  "cd . && npm run start:prod"
+]

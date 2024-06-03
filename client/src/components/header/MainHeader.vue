@@ -2,7 +2,7 @@
 
 <template>
   <header class="pb-[52px]">
-    <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">
+    <h1 class="text-2xl/8 font-semibold sm:text-xl/8 text-white">
       Dashboard Demo
     </h1>
     <p
